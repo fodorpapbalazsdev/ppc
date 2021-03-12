@@ -1,15 +1,30 @@
 package fodorpapabalazsdev.ppc.entity;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.util.Objects;
 
-@Getter
+@Entity
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class MagnetCylinder {
-    private final int teeth;
-    private final double girth;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    private int teeth;
+    private double girth;
+
+    public MagnetCylinder(int teeth, double grith) {
+        this.teeth = teeth;
+        this.girth = grith;
+    }
 
     @Override
     public boolean equals(Object o) {

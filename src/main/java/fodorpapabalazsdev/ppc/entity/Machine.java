@@ -3,17 +3,30 @@ package fodorpapabalazsdev.ppc.entity;
 import fodorpapabalazsdev.ppc.exception.CylinderAlreadyAddedToMachine;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 
+@Entity
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class Machine {
-    private final String name;
-    private final List<MagnetCylinder> cylinders = new ArrayList<MagnetCylinder>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    private String name;
+    @OneToMany()
+    private List<MagnetCylinder> cylinders;
+
+    public Machine(String nameOfTheMachine) {
+        this.cylinders = new ArrayList<MagnetCylinder>();
+        this.name = nameOfTheMachine;
+    }
 
     public void addCylinder(MagnetCylinder cylinder) throws CylinderAlreadyAddedToMachine {
         if (!cylinders.contains(cylinder)) {
