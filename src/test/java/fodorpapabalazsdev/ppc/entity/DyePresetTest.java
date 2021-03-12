@@ -1,6 +1,8 @@
 package fodorpapabalazsdev.ppc.entity;
 
-import fodorpapabalazsdev.ppc.entity.dye.Dye;
+import fodorpapabalazsdev.ppc.entity.ppc.DyeCylinder;
+import fodorpapabalazsdev.ppc.entity.ppc.DyePreset;
+import fodorpapabalazsdev.ppc.entity.ppc.dye.Dye;
 import fodorpapabalazsdev.ppc.exception.DyeAlreadyPresentInThisPreset;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;

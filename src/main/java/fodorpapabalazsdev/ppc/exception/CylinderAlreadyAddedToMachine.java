@@ -1,7 +1,7 @@
 package fodorpapabalazsdev.ppc.exception;
 
-import fodorpapabalazsdev.ppc.entity.Machine;
-import fodorpapabalazsdev.ppc.entity.MagnetCylinder;
+import fodorpapabalazsdev.ppc.entity.ppc.Machine;
+import fodorpapabalazsdev.ppc.entity.ppc.MagnetCylinder;
 
 public class CylinderAlreadyAddedToMachine extends Exception {
     public CylinderAlreadyAddedToMachine(Machine machine, MagnetCylinder magnetCylinder) {

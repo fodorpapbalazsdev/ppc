@@ -1,6 +1,6 @@
 package fodorpapabalazsdev.ppc.repository;
 
-import fodorpapabalazsdev.ppc.entity.Machine;
+import fodorpapabalazsdev.ppc.entity.ppc.Machine;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

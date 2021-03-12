@@ -1,5 +1,7 @@
 package fodorpapabalazsdev.ppc.entity;
 
+import fodorpapabalazsdev.ppc.entity.ppc.Machine;
+import fodorpapabalazsdev.ppc.entity.ppc.MagnetCylinder;
 import fodorpapabalazsdev.ppc.exception.CylinderAlreadyAddedToMachine;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;

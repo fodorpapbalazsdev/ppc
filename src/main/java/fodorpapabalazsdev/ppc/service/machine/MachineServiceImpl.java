@@ -1,6 +1,6 @@
 package fodorpapabalazsdev.ppc.service.machine;
 
-import fodorpapabalazsdev.ppc.entity.Machine;
+import fodorpapabalazsdev.ppc.entity.ppc.Machine;
 import fodorpapabalazsdev.ppc.repository.MachineRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

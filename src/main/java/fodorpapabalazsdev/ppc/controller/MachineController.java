@@ -1,6 +1,6 @@
 package fodorpapabalazsdev.ppc.controller;
 
-import fodorpapabalazsdev.ppc.entity.Machine;
+import fodorpapabalazsdev.ppc.entity.ppc.Machine;
 import fodorpapabalazsdev.ppc.service.machine.MachineService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
