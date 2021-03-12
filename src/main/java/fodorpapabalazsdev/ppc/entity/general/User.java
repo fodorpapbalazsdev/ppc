@@ -1,16 +1,13 @@
-package fodorpapabalazsdev.ppc.entity;
+package fodorpapabalazsdev.ppc.entity.general;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-@Getter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
@@ -19,4 +16,7 @@ public class User {
     private Integer id;
     private String username;
     private String email;
+    private String password;
+    @OneToOne
+    private Role role;
 }

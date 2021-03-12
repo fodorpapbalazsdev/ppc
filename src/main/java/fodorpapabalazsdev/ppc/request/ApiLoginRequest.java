@@ -3,7 +3,7 @@ package fodorpapabalazsdev.ppc.request;
 import lombok.Getter;
 
 @Getter
-public class LoginRequest {
+public class ApiLoginRequest {
     private String email;
     private String password;
 }

@@ -1,6 +1,6 @@
-package fodorpapabalazsdev.ppc.entity.dye;
+package fodorpapabalazsdev.ppc.entity.ppc.dye;
 
-import fodorpapabalazsdev.ppc.entity.DyeCylinder;
+import fodorpapabalazsdev.ppc.entity.ppc.DyeCylinder;
 
 public class Metal extends Dye {
 

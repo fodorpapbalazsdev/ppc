@@ -1,6 +1,6 @@
-package com.avinty.hr.security.jwt;
+package fodorpapabalazsdev.ppc.security.jwt;
 
-import com.avinty.hr.models.LoginRequest;
+import fodorpapabalazsdev.ppc.request.ApiLoginRequest;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -16,7 +16,7 @@ public class JwtTokenProvider {
     @Value("${app.jwtExpirationMs}")
     private int jwtExpirationMs;
 
-    public String generateToken(LoginRequest loginRequest) {
+    public String generateToken(ApiLoginRequest loginRequest) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + jwtExpirationMs);
         return Jwts.builder()

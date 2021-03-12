@@ -1,11 +1,9 @@
-package com.avinty.hr.security;
+package fodorpapabalazsdev.ppc.security;
 
-import com.avinty.hr.exception.ResourceException;
-import com.avinty.hr.exception.employee.EmployeeNotFoundException;
-import com.avinty.hr.models.LoginRequest;
+import fodorpapabalazsdev.ppc.request.ApiLoginRequest;
 
 public interface AuthService {
-    JwtAuthenticationResponse getJwtAuthentication(LoginRequest loginRequest) throws ResourceException, EmployeeNotFoundException;
+    JwtAuthenticationResponse getJwtAuthentication(ApiLoginRequest apiLoginRequest);
 
-    ApiResponse validateToken(ValidateTokenRequest validateTokenRequest) throws ResourceException, EmployeeNotFoundException;
+    ApiResponse validateToken(ApiValidateTokenRequest apiValidateTokenRequest);
 }

@@ -1,4 +1,4 @@
-package fodorpapabalazsdev.ppc.entity;
+package fodorpapabalazsdev.ppc.entity.ppc;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

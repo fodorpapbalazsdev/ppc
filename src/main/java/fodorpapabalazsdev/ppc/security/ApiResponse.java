@@ -1,4 +1,4 @@
-package com.avinty.hr.security;
+package fodorpapabalazsdev.ppc.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

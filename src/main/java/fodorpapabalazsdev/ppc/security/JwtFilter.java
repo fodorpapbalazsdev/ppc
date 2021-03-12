@@ -1,6 +1,6 @@
-package com.avinty.hr.security;
+package fodorpapabalazsdev.ppc.security;
 
-import com.avinty.hr.security.jwt.JwtTokenProvider;
+import fodorpapabalazsdev.ppc.security.jwt.JwtTokenProvider;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -12,12 +12,11 @@ import java.io.IOException;
 
 public class JwtFilter extends OncePerRequestFilter {
 
-    private JwtTokenProvider jwtTokenProvider;
+    private final JwtTokenProvider jwtTokenProvider;
 
     public JwtFilter(JwtTokenProvider jwtTokenProvider) {
         this.jwtTokenProvider = jwtTokenProvider;
     }
-
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {

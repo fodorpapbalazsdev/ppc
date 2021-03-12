@@ -1,4 +1,4 @@
-package response;
+package fodorpapabalazsdev.ppc.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

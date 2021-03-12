@@ -3,6 +3,6 @@ package fodorpapabalazsdev.ppc.security;
 import lombok.Getter;
 
 @Getter
-public class ValidateTokenRequest {
+public class ApiValidateTokenRequest {
     private String token;
 }

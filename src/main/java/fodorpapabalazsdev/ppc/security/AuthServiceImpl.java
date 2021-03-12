@@ -1,13 +1,12 @@
-package com.avinty.hr.security;
+package fodorpapabalazsdev.ppc.security;
 
-import com.avinty.hr.entity.Employee;
-import com.avinty.hr.exception.ResourceException;
-import com.avinty.hr.exception.employee.EmployeeNotFoundException;
-import com.avinty.hr.models.LoginRequest;
-import com.avinty.hr.security.jwt.JwtTokenProvider;
-import com.avinty.hr.service.EmployeeService;
+import fodorpapabalazsdev.ppc.entity.general.User;
+import fodorpapabalazsdev.ppc.request.ApiLoginRequest;
+import fodorpapabalazsdev.ppc.security.jwt.JwtTokenProvider;
+import fodorpapabalazsdev.ppc.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.ResourceAccessException;
 
 @Service
 public class AuthServiceImpl implements AuthService {
@@ -16,40 +15,39 @@ public class AuthServiceImpl implements AuthService {
     JwtTokenProvider jwtTokenProvider;
 
     @Autowired
-    EmployeeService employeeService;
+    UserService userService;
 
     @Override
-    public JwtAuthenticationResponse getJwtAuthentication(LoginRequest loginRequest) throws ResourceException, EmployeeNotFoundException {
+    public JwtAuthenticationResponse getJwtAuthentication(ApiLoginRequest apiLoginRequest) {
 
-        // TODO: Validation goes here
-        if (loginRequest.getPassword() == null || loginRequest.getEmail() == null) {
-            throw new ResourceException("emial-or-password-null", "Email and Password is required for token generation!");
+        if (apiLoginRequest.getPassword() == null || apiLoginRequest.getEmail() == null) {
+            throw new ResourceAccessException("Email and Password is required for token generation");
         }
 
-        String jwt = jwtTokenProvider.generateToken(loginRequest);
+        String jwt = jwtTokenProvider.generateToken(apiLoginRequest);
         JwtAuthenticationResponse jwtAuthenticationResponse = new JwtAuthenticationResponse(jwt);
-        Employee employee = employeeService.getEmployeeByEmail(loginRequest.getEmail());
+        User user = userService.getUserByEmail(apiLoginRequest.getEmail());
 
-        // TODO: it should coming from database also
-        if (employee.getEmail().equals("admin@admin.com")) {
-            jwtAuthenticationResponse.setRole("ROLE_ADMIN");
-        } else {
-            jwtAuthenticationResponse.setRole("ROLE_USER");
+        /* check it's password */
+        if (!user.getPassword().equals(apiLoginRequest.getPassword())) {
+            throw new ResourceAccessException("Password is incorrect for user: " + user);
         }
+
+        jwtAuthenticationResponse.setRole(user.getRole().getName());
 
         return jwtAuthenticationResponse;
     }
 
     @Override
-    public ApiResponse validateToken(ValidateTokenRequest validateTokenRequest) throws ResourceException, EmployeeNotFoundException {
-        if (validateTokenRequest.getToken() == null) {
-            throw new ResourceException("token-null", "Token is required for token validation!");
+    public ApiResponse validateToken(ApiValidateTokenRequest apiValidateTokenRequest) {
+        if (apiValidateTokenRequest.getToken() == null) {
+            throw new ResourceAccessException("Token is required for token validation!");
         }
 
-        String jwt = validateTokenRequest.getToken();
+        String jwt = apiValidateTokenRequest.getToken();
         if (jwtTokenProvider.validateToken(jwt)) {
             String email = jwtTokenProvider.getEmailFromJwt(jwt);
-            employeeService.getEmployeeByEmail(email);
+            userService.getUserByEmail(email);
             return new ApiResponse(Boolean.TRUE, "Valid token for email " + email);
         }
         return new ApiResponse(Boolean.FALSE, "Invalid token");

@@ -1,6 +1,6 @@
-package fodorpapabalazsdev.ppc.entity;
+package fodorpapabalazsdev.ppc.entity.ppc;
 
-import fodorpapabalazsdev.ppc.entity.dye.Dye;
+import fodorpapabalazsdev.ppc.entity.ppc.dye.Dye;
 import fodorpapabalazsdev.ppc.exception.DyeAlreadyPresentInThisPreset;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
