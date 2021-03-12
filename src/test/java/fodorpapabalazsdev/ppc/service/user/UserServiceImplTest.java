@@ -15,7 +15,9 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
@@ -111,5 +113,27 @@ class UserServiceImplTest {
 
         /* Call & Assert */
         assertThrows(ResourceAccessException.class, () -> userService.getUserByEmail("asd"));
+    }
+
+    @Test
+    void checkIfEmailIsAlreadyTaken() {
+        /* Mock */
+        when(userRepository.findByEmail("exists")).thenReturn(Optional.of(new User()));
+        when(userRepository.findByEmail("notExists")).thenReturn(Optional.empty());
+
+        /* Call & Assert */
+        assertTrue(userService.checkIfEmailIsAlreadyTaken("exists"));
+        assertFalse(userService.checkIfEmailIsAlreadyTaken("notExists"));
+    }
+
+    @Test
+    void checkIfNameIsAlreadyTaken() {
+        /* Mock */
+        when(userRepository.findByName("exists")).thenReturn(Optional.of(new User()));
+        when(userRepository.findByName("notExists")).thenReturn(Optional.empty());
+
+        /* Call & Assert */
+        assertTrue(userService.checkIfNameIsAlreadyTaken("exists"));
+        assertFalse(userService.checkIfNameIsAlreadyTaken("notExists"));
     }
 }

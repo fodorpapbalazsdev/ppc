@@ -41,4 +41,19 @@ public class UserServiceImpl implements UserService {
         }
         return user.get();
     }
+
+    @Override
+    public boolean checkIfEmailIsAlreadyTaken(String email) {
+        return userRepository.findByEmail(email).isPresent();
+    }
+
+    @Override
+    public boolean checkIfNameIsAlreadyTaken(String name) {
+        return userRepository.findByName(name).isPresent();
+    }
+
+    @Override
+    public User adduser(User newUser) {
+        return userRepository.save(newUser);
+    }
 }

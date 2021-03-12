@@ -5,6 +5,7 @@ import fodorpapabalazsdev.ppc.request.ApiLoginRequest;
 import fodorpapabalazsdev.ppc.security.jwt.JwtTokenProvider;
 import fodorpapabalazsdev.ppc.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
 
@@ -16,6 +17,9 @@ public class AuthServiceImpl implements AuthService {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @Override
     public JwtAuthenticationResponse getJwtAuthentication(ApiLoginRequest apiLoginRequest) {
@@ -29,8 +33,8 @@ public class AuthServiceImpl implements AuthService {
         User user = userService.getUserByEmail(apiLoginRequest.getEmail());
 
         /* check it's password */
-        if (!user.getPassword().equals(apiLoginRequest.getPassword())) {
-            throw new ResourceAccessException("Password is incorrect for user: " + user);
+        if (!passwordEncoder.matches(apiLoginRequest.getPassword(), user.getPassword())) {
+            throw new ResourceAccessException("Password is incorrect for user: " + user.getUsername());
         }
 
         jwtAuthenticationResponse.setRole(user.getRole().getName());

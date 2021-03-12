@@ -10,4 +10,10 @@ public interface UserService {
     User getUser(Integer id);
 
     User getUserByEmail(String email);
+
+    boolean checkIfEmailIsAlreadyTaken(String email);
+
+    boolean checkIfNameIsAlreadyTaken(String username);
+
+    User adduser(User newUser);
 }
