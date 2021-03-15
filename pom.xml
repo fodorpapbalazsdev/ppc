@@ -96,8 +96,11 @@
                         <artifactId>jib-maven-plugin</artifactId>
                         <version>2.2.0</version>
                         <configuration>
+                            <from>
+                                <image>gcr.io/distroless/java:11</image>
+                            </from>
                             <to>
-                                <image>fodorpapbalazsdev/baeldung-ci-cd-process</image>
+                                <image>fodorpapbalazsdev/ppc-ci-cd-process</image>
                                 <tags>
                                     <tag>${project.version}</tag>
                                     <tag>latest</tag>
