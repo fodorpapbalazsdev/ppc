@@ -8,11 +8,12 @@ addons:
 
 jdk:
   - openjdk11
+
 before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
   - sudo mysql -e 'CREATE DATABASE IF NOT EXISTS app_db;'
   - docker pull openjdk:11-jre-slim-sid
 
 script:
-  - ./mvnw clean install
-  - ./mvnw deploy jib:build -P deploy-docker
+  - ./mvnw clean install -DskipTests
+  - ./mvnw deploy jib:build -P deploy-docker -DskipTests
