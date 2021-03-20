@@ -3,11 +3,14 @@ language: java
 services:
   - mysql
 
+addons:
+  mariadb: 10.4
+
 jdk:
   - openjdk11
 before_install:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS app_db;'
+  - sudo mysql -e 'CREATE DATABASE IF NOT EXISTS app_db;'
   - docker pull openjdk:11-jre-slim-sid
 
 script:
