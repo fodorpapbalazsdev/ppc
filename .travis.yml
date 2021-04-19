@@ -1,19 +1,16 @@
 language: java
 
 services:
-  - mysql
+  - docker
 
-addons:
-  mariadb: 10.4
-
-jdk:
-  - openjdk11
+env:
+  - DOCKER_COMPOSE_VERSION=1.29.0
 
 before_install:
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - sudo mysql -e 'CREATE DATABASE IF NOT EXISTS app_db;'
-  - docker pull openjdk:11-jre-slim-sid
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
 
 script:
-  - ./mvnw clean install -DskipTests
-  - ./mvnw deploy jib:build -P deploy-docker -DskipTests
+  - docker-compose build

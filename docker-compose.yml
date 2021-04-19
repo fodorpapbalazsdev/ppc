@@ -1,29 +1,24 @@
 version: '3.9'
+
 services:
   ppc-server:
     container_name: ppc-server
-    build: .
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
     image: ppc-server
     ports:
       - 8080:8080
-    networks:
-      - spring-cloud-network
+    depends_on:
+      - db
 
   db:
-    container_name: db
-    image: mariadb:10.5.8
-    environment:
-      MYSQL_ROOT_PASSWORD: my_secret_password
-      MYSQL_DATABASE: app_db
-      MYSQL_USER: db_user
-      MYSQL_PASSWORD: db_user_pass
+    image: 'mariadb:latest'
+    container_name: kiosk-maria-db
     ports:
-      - "6033:3306"
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     volumes:
-      - dbdata:/var/lib/mysql
-volumes:
-  dbdata:
-networks:
-  spring-cloud-network:
-    driver: bridge
+      - ../database/mysql/data:/var/lib/mysql
 
